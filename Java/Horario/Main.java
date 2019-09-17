@@ -47,5 +47,7 @@ public class Main{
         horarioDeAxel.addMateria(arquitectura);
         horarioDeAxel.addMateria(teoria);
         horarioDeAxel.printHorario();
+        horarioDeAxel.removeMateria(algebraLineal);
+        horarioDeAxel.printHorario();
     }
 }

@@ -6,6 +6,7 @@ public class Materia{
     private int totalDeClases = 0;
 
     // Constructor
+    public Materia(){}
     public Materia(String nombreDeAsig, int creditos, Clase clases[]){
         this.nombreDeAsig = nombreDeAsig;
         this.creditos = creditos;

@@ -56,6 +56,31 @@ public class Horario{
         }
         
     }
+    public void removeMateria(Materia materia){
+        boolean encontrado = false;
+        for (int i = 0; i < totalDeMaterias; i++) {
+            // Busca exactamente la misma materia dentro del horario
+            if(materias[i] == materia){
+                // Si la encuentra, entonces todas las demás se recorren eliminando
+                // a materia que se quiere quitar
+                for (int j = i; j < totalDeMaterias; j++) {
+                    if(i+1 < totalDeMaterias){
+                        materias[j] = materias[j+1];
+                        materias[j+1] = null;
+                    }
+                }
+                totalDeMaterias--;
+                encontrado = true;
+                break; 
+            }
+        }
+        if(!encontrado){
+            System.out.println(materia.getNombreDeAsig() +  " no está en el horario");
+        }
+        else{
+            System.out.println(materia.getNombreDeAsig() + " removida");
+        }
+    }
     public void printHorario(){
         System.out.println("\nHorario de " + nombreDeAlumno + ": ");
         if(totalDeMaterias == 0){
