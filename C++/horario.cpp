@@ -5,12 +5,23 @@ struct Time{
     int hour, minutes;
     std::string time;
     Time(){}
-    Time(std::string _time){
-        int _hour, _minutes;
-        sscanf(time.c_str(), "%d:%d", &_hour, &_minutes);
+    Time(int _hour, int _minutes){
         hour = _hour;
         minutes = _minutes;
-        time = _time;
+    }
+    void print_time(){
+        if (hour < 10){
+            std::cout << "0" << hour << ":";   
+        }
+        else{
+            std::cout << hour << ":";
+        }
+        if (minutes < 10){
+            std::cout << "0" << minutes;
+        }
+        else{
+            std::cout << minutes;
+        }
     }
 };
 
@@ -46,8 +57,10 @@ struct Subject{
         std::cout << "Days: " << "\n";
         for (size_t i = 0; i < total_classes; i++){
             std::cout << classes[i].day << "-> ";
-            std::cout << classes[i].start.time << " - ";   
-            std::cout << classes[i].finish.time << "\n";   
+            classes[i].start.print_time();
+            std::cout << " - ";   
+            classes[i].finish.print_time(); 
+            std::cout << "\n";   
         }
     };
 };
@@ -106,12 +119,34 @@ struct Schedule{
         }
         
     };
+    // NO SIRVE XD
+    // void remove_subject(Subject _subject){
+    //     int done = 0;
+    //     for (size_t i = 0; i < total_subjects; i++){
+    //         if(subjects[i].name.compare(_subject.name)){
+    //             auto it = std::find(subjects.begin(), subjects.end(), subjects[i]);
+    //             subjects.erase(it);
+    //             done=1;
+    //             break;
+    //         }
+    //     }
+    //     if (done == 1){
+    //         std::cout << "Your subject can't be found";
+    //     }
+    // };
+    void print_schedule(){
+        std::cout << "\nYour schedule:\n";
+        for (size_t i = 0; i < total_subjects; i++){
+            subjects[i].print_subject();
+            std::cout << "\n";
+        }
+    };
 };
 
 int main(int argc, char const *argv[])
 {
     // Making the classes
-    Time start("7:30"), finish("9:30");
+    Time start(7,30), finish(9,30);
     ClassSubject class1(start, finish, 1), class2(start, finish, 2);
     std::vector<ClassSubject> classes;
     classes.push_back(class1);
@@ -120,7 +155,7 @@ int main(int argc, char const *argv[])
     // This class has the same classes of the first one
     Subject mate2("Matematicas2", 8, classes);
 
-    Time start1("9:30"), finish1("11:00"), start2("10:00"), finish2("11:30");
+    Time start1(9,30), finish1(11,0), start2(10,0), finish2(11,30);
     ClassSubject class_progra1(start1, finish1, 1), class_progra2(start2, finish2, 2), class_progra3(start1, finish1, 4);
     std::vector<ClassSubject> classes_progra;
     classes_progra.push_back(class_progra1);
@@ -132,11 +167,10 @@ int main(int argc, char const *argv[])
     my_schedule.add_subject(mate);
     my_schedule.add_subject(mate2);
     my_schedule.add_subject(progra);
+    my_schedule.print_schedule();
 
-    std::cout << "\nYour schedule:\n";
-    for (size_t i = 0; i < my_schedule.total_subjects; i++){
-        my_schedule.subjects[i].print_subject();
-        std::cout << "\n";
-    }
+    // my_schedule.remove_subject(mate2);
+    // my_schedule.remove_subject(mate);
+    // my_schedule.print_schedule();
     return 0;
 };
