@@ -32,6 +32,9 @@ public class Hora{
             
     }
     public String compararHoras(Hora hora2){
+        // Las horas y minutos se convierten en segundos y se suman,
+        // por lo que si, el horario esta en formato de 24hr, se puede comparar sin
+        // problemas entre horas
         int hora1EnSegundos = (this.horas * 3600) + (this.minutos * 60);
         int hora2EnSegundos = (hora2.getHoras() * 3600) + (hora2.getMinutos() * 60);
         if(hora1EnSegundos > hora2EnSegundos){
